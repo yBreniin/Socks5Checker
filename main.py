@@ -9,6 +9,7 @@ def read_proxies_from_file(file_path):
 def test_proxies_with_api(proxies):
     api_url = "https://api.ipify.org/?format=json" # api para verificar o ip
     verified_proxies = []
+    mismatch_proxies = []
 
     for proxy in proxies:
         url = "https://www.roblox.com" # url que será testado os proxys
@@ -26,6 +27,7 @@ def test_proxies_with_api(proxies):
                         verified_proxies.append(proxy)
                     else:
                         print(f"[{proxy}] | Mismatch - IP da API: {api_ip}") # se o proxy é diferente que está na api
+                        mismatch_proxies.append(proxy)
                 else:
                     print(f"[{proxy}] | N/A - Proxy retornou um código de status {response.status_code}.") # codigo que o proxy retornou
         except httpx.RequestError as e:
@@ -33,6 +35,9 @@ def test_proxies_with_api(proxies):
 
     with open("proxyVerified.txt", "w") as file: # onde vai salvar os proxy que deram ok.
         file.write("\n".join(verified_proxies))
+    
+    with open("proxyMismatch.txt", "w") as file:
+        file.write("\n".join(mismatch_proxies))
 
 if __name__ == "__main__":
     proxy_file_path = "proxy.txt" # onde vai estar a lista de proxy.
