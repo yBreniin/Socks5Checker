@@ -1,6 +1,6 @@
 # Socks5Checker
  proxy checker - socks5
  
-puts your SOCKS5 proxy list inside proxy.txt
+coloca sua lista de proxy SOCKS5 dentro do "proxy.txt"
 
-run setup.bat for pip requirements
+execute o setup.bat para baixar as dependencias do pip
